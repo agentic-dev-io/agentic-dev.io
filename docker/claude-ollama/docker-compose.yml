@@ -1,0 +1,37 @@
+# Claude Code + Ollama (Host) + SearXNG (Web-Suche, kein API-Key).
+# Start: docker compose -f docker/claude-ollama/docker-compose.yml up -d searxng
+#       docker compose -f docker/claude-ollama/docker-compose.yml run --rm claude
+
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    volumes:
+      - ./searxng/settings.yml:/etc/searxng/settings.yml:ro
+      - searxng-data:/var/cache/searxng
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+
+  claude:
+    build:
+      context: ../..
+      dockerfile: docker/claude-ollama/Dockerfile
+    image: claude-ollama-template:v1
+    container_name: claude-ollama
+    volumes:
+      - ../..:/workspace
+    working_dir: /workspace
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: true
+    environment:
+      - SEARXNG_INSTANCES=http://searxng:8080
+    depends_on:
+      - searxng
+    # Ohne command = Image-Entrypoint (interaktiv). Mit --print Prompt angeben:
+    # command: ["claude", "--print", "Liste die Dateien im Workspace"]
+
+volumes:
+  searxng-data:

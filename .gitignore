@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+*.log
+
+# Build output (wird von GitHub Actions gebaut)
+dist/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup
+web-backup/
