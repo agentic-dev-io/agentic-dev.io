@@ -20,6 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Checkout CMS data
+        uses: actions/checkout@v4
+        with:
+          repository: agentic-dev-io/cms
+          path: ../cms
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:

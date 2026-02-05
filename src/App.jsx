@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Terminal, Check, ArrowRight, X, Shield, Zap, Lock } from 'lucide-react';
+import { Check, ArrowRight, ExternalLink } from 'lucide-react';
 
 import heroData from '@content/hero.json';
-import problemsData from '@content/problems.json';
-import solutionsData from '@content/solutions.json';
+import projectsData from '@content/projects.json';
 import stackData from '@content/stack.json';
 import servicesData from '@content/services.json';
-import comparisonData from '@content/comparison.json';
 import aboutData from '@content/about.json';
 import ecosystemData from '@shared/ecosystem.json';
-
-const solutionIcons = { Lock, Shield, Zap };
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,9 +23,6 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const cloudComparison = comparisonData.find(c => c.metadata.side === 'cloud');
-  const localComparison = comparisonData.find(c => c.metadata.side === 'local');
 
   const currentSiteId = 'agentic-dev';
 
@@ -107,12 +100,17 @@ function App() {
               agentic-dev.io
             </a>
             <div className="hidden md:flex items-center gap-8">
-              <button onClick={() => scrollToSection('services')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">
-                Services
+              <button onClick={() => scrollToSection('projects')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">
+                Projekte
               </button>
-              <button onClick={() => scrollToSection('contact')} className="px-5 py-2 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] rounded-full text-[#050508] font-semibold text-sm hover:opacity-90 transition-opacity">
-                Gespräch buchen
-              </button>
+              <a
+                href="https://github.com/agentic-dev-io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] rounded-full text-[#050508] font-semibold text-sm hover:opacity-90 transition-opacity"
+              >
+                GitHub
+              </a>
             </div>
           </div>
         </div>
@@ -145,12 +143,14 @@ function App() {
                     </span>
                   ))}
                 </div>
-                <button
-                  onClick={() => scrollToSection('contact')}
+                <a
+                  href={heroData.cta_href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
                 >
                   {heroData.cta_text} <ArrowRight size={18} />
-                </button>
+                </a>
               </div>
 
               {/* Terminal */}
@@ -159,16 +159,16 @@ function App() {
                   <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
                   <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
                   <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-                  <div className="flex-1 text-center font-mono text-xs text-[#5a5a6e]">local-ai-setup.sh</div>
+                  <div className="flex-1 text-center font-mono text-xs text-[#5a5a6e]">agentic-dev.sh</div>
                 </div>
                 <div className="p-6 font-mono text-sm leading-relaxed">
                   {[
-                    { cmd: 'ollama', args: 'run llama3.1', color: '#f0f0f5' },
-                    { text: '→ Modell läuft lokal auf deiner GPU...', color: '#9999aa' },
-                    { text: '→ Keine Daten werden übertragen...', color: '#9999aa' },
-                    { text: '→ API-Kosten: 0,00 €', color: '#9999aa' },
-                    { text: '✓ Bereit. Unbegrenzte Anfragen.', color: '#26ffd4', success: true },
-                    { text: '✓ Deine Daten bleiben bei dir.', color: '#26ffd4', success: true, cursor: true }
+                    { cmd: 'mcp', args: 'serve --agent mao', color: '#f0f0f5' },
+                    { text: '→ Loading MCP tools...', color: '#9999aa' },
+                    { text: '→ agent-farm: 175 macros ready', color: '#9999aa' },
+                    { text: '→ Connecting vector stores...', color: '#9999aa' },
+                    { text: '✓ Multi-agent swarm online.', color: '#26ffd4', success: true },
+                    { text: '✓ Open Source. Built to ship.', color: '#26ffd4', success: true, cursor: true }
                   ].map((line, i) => (
                     <div
                       key={i}
@@ -191,45 +191,47 @@ function App() {
           </div>
         </section>
 
-        {/* Problem Section */}
-        <section className="py-24 border-t border-white/[0.08]">
+        {/* Projects Section */}
+        <section id="projects" className="py-24 border-t border-white/[0.08]">
           <div className="max-w-[1000px] mx-auto px-8">
-            <h2 className="text-3xl font-semibold mb-8 font-['Fraunces']">ChatGPT & Co. sind praktisch, aber...</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {problemsData.map((item, i) => (
-                <div key={i} className="p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl hover:border-white/[0.15] hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 transition-all">
-                  <div className="flex items-start gap-4">
-                    <span className="text-2xl">{item.icon}</span>
-                    <div>
-                      <h3 className="text-base font-semibold mb-2">{item.title}</h3>
-                      <p className="text-sm text-[#9999aa]">{item.description}</p>
+            <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4 font-mono">Open Source</div>
+            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Unsere Projekte</h2>
+            <p className="text-lg text-[#9999aa] mb-10 max-w-[700px]">
+              Frameworks, Tools und Plugins die wir selbst bauen und benutzen.
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projectsData.map((project, i) => (
+                <a
+                  key={i}
+                  href={project.metadata.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl hover:border-[#ff6b35]/40 hover:shadow-[0_8px_32px_rgba(255,107,53,0.1)] hover:-translate-y-1 transition-all block no-underline"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="text-2xl">{project.icon}</span>
+                    <div className="flex items-center gap-2">
+                      {project.metadata.badge && (
+                        <span className="px-2 py-0.5 bg-[#ff6b35]/10 border border-[#ff6b35]/30 text-[#ff6b35] text-[0.65rem] font-semibold rounded-full uppercase tracking-wider">
+                          {project.metadata.badge}
+                        </span>
+                      )}
+                      <ExternalLink size={14} className="text-[#5a5a6e] group-hover:text-[#ff6b35] transition-colors" />
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Solution Section */}
-        <section className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Die Alternative: Alles lokal</h2>
-            <p className="text-lg text-[#9999aa] mb-8 max-w-[700px]">
-              Moderne AI-Modelle laufen auf deinem eigenen Rechner.
-              Einmal einrichten, für immer nutzen.
-            </p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {solutionsData.map((item, i) => {
-                const IconComponent = solutionIcons[item.icon];
-                return (
-                  <div key={i} className="p-8 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center hover:border-white/[0.15] transition-all">
-                    {IconComponent && <IconComponent size={32} className="mx-auto mb-4 text-[#26ffd4]" />}
-                    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-[#9999aa]">{item.description}</p>
+                  <h3 className="font-mono text-base font-semibold mb-2 text-[#f0f0f5] group-hover:text-[#ff6b35] transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-[#9999aa] mb-4 leading-relaxed">{project.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.features.map((tag, j) => (
+                      <span key={j} className="px-2 py-0.5 bg-white/[0.04] border border-white/[0.06] text-[0.7rem] text-[#5a5a6e] rounded-md">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                );
-              })}
+                </a>
+              ))}
             </div>
           </div>
         </section>
@@ -237,8 +239,8 @@ function App() {
         {/* Stack Section */}
         <section className="py-24 border-t border-white/[0.08]">
           <div className="max-w-[1000px] mx-auto px-8">
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Der Stack</h2>
-            <p className="text-lg text-[#9999aa] mb-8">Open Source Tools, professionell konfiguriert.</p>
+            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Tech Stack</h2>
+            <p className="text-lg text-[#9999aa] mb-8">Die Technologien hinter unseren Projekten.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {stackData.map((item, i) => (
                 <div key={i} className="p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center hover:border-white/[0.15] transition-all">
@@ -250,11 +252,11 @@ function App() {
           </div>
         </section>
 
-        {/* Services Section */}
-        <section id="services" className="py-24 border-t border-white/[0.08]">
+        {/* Capabilities Section */}
+        <section id="capabilities" className="py-24 border-t border-white/[0.08]">
           <div className="max-w-[1000px] mx-auto px-8">
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Services</h2>
-            <p className="text-lg text-[#9999aa] mb-8">Von Setup bis Automatisierung – ich helfe dir, lokal produktiv zu werden.</p>
+            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Was wir bauen</h2>
+            <p className="text-lg text-[#9999aa] mb-8">Drei Bereiche, ein Fokus: AI Agents die wirklich funktionieren.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {servicesData.map((service, i) => (
                 <div
@@ -265,7 +267,7 @@ function App() {
                 >
                   {service.metadata.featured && (
                     <span className="absolute -top-3 right-5 px-3 py-1 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] text-xs font-semibold rounded-full">
-                      Beliebt
+                      Core
                     </span>
                   )}
                   <h3 className="text-lg font-semibold mb-2">{service.icon} {service.title}</h3>
@@ -273,47 +275,12 @@ function App() {
                   <ul className="space-y-2">
                     {service.features.map((feat, j) => (
                       <li key={j} className="flex items-center gap-2 text-sm text-[#9999aa]">
-                        <Check size={14} className="text-[#26ffd4]" /> {feat}
+                        <Check size={14} className="text-[#26ffd4] flex-shrink-0" /> {feat}
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
-            </div>
-            <p className="text-center mt-8 text-[#5a5a6e]">
-              Preise individuell je nach Umfang –{' '}
-              <button onClick={() => scrollToSection('contact')} className="text-[#ff6b35] hover:underline">
-                lass uns reden
-              </button>
-            </p>
-          </div>
-        </section>
-
-        {/* USP Comparison */}
-        <section className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
-            <h2 className="text-3xl font-semibold mb-8 font-['Fraunces']">Cloud vs. Lokal</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="p-8 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl">
-                <h3 className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-6">{cloudComparison.title}</h3>
-                <ul className="space-y-3">
-                  {cloudComparison.features.map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-[#9999aa]">
-                      <X size={14} className="text-red-500" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="p-8 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl">
-                <h3 className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-6">{localComparison.title}</h3>
-                <ul className="space-y-3">
-                  {localComparison.features.map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-[#9999aa]">
-                      <Check size={14} className="text-[#26ffd4]" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </div>
         </section>
@@ -335,68 +302,45 @@ function App() {
                   ))}
                 </div>
               </div>
-              <div className="p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl">
-                <h3 className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4">Meine Projekte</h3>
-                {aboutData.metadata.projects.map((proj, i) => (
-                  <div key={i} className="py-3 border-b border-white/[0.08] last:border-0">
-                    <div className="font-mono text-sm text-[#f0f0f5]">{proj.name}</div>
-                    <div className="text-xs text-[#5a5a6e]">{proj.desc}</div>
-                  </div>
-                ))}
+              <div>
+                <div className="p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl">
+                  <h3 className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4">Partner</h3>
+                  {ecosystemData.filter(org => org.org_id !== currentSiteId).map((org, i) => (
+                    <a
+                      key={i}
+                      href={org.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 py-3 border-b border-white/[0.08] last:border-0 group"
+                    >
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: org.color }} />
+                      <div>
+                        <div className="font-mono text-sm text-[#f0f0f5] group-hover:text-[#ff6b35] transition-colors">{org.name}</div>
+                        <div className="text-xs text-[#5a5a6e]">{org.role}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Ecosystem Section */}
-        <section className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
-            <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4 font-mono">Ecosystem</div>
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Drei Orgs. Ein System.</h2>
-            <p className="text-lg text-[#9999aa] mb-10 max-w-[700px]">
-              agentic-dev ist Teil eines Ökosystems aus Forschung, Entwicklung und Produktion.
-              Was im Lab entsteht, wird hier zu Tools – und im Studio zu Produktionen.
-            </p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {ecosystemData.map((org, i) => {
-                const isActive = org.org_id === currentSiteId;
-                return (
-                  <div
-                    key={i}
-                    className={`p-8 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border rounded-2xl relative transition-all ${
-                      isActive ? 'border-[#ff6b35]/50 shadow-[0_0_30px_rgba(255,107,53,0.1)]' : 'border-white/[0.08] hover:border-white/[0.15]'
-                    }`}
-                  >
-                    {isActive && (
-                      <span className="absolute -top-3 right-5 px-3 py-1 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] text-xs font-semibold rounded-full">
-                        Du bist hier
-                      </span>
-                    )}
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: org.color }} />
-                      <span className="font-mono text-sm text-[#f0f0f5]">{org.name}</span>
-                    </div>
-                    <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-3">{org.role}</div>
-                    <p className="text-sm text-[#9999aa] mb-4">{org.description}</p>
-                    {!isActive && org.href && (
-                      <a href={org.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm hover:underline transition-colors" style={{ color: org.color }}>
-                        Entdecken <ArrowRight size={14} />
-                      </a>
-                    )}
+            {/* Timeline */}
+            <div className="mt-12 p-6 bg-[rgba(24,24,32,0.4)] border border-white/[0.06] rounded-2xl">
+              <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-6 font-mono">Evolution</div>
+              <div className="grid grid-cols-5 gap-4">
+                {[
+                  { year: '2004', label: 'Blender Origin', color: '#9999aa' },
+                  { year: '2008', label: 'VWAG Partner', color: '#22d3ee' },
+                  { year: '2014', label: 'Neural Research', color: '#a78bfa' },
+                  { year: '2024', label: 'Rust & Agents', color: '#ffa726' },
+                  { year: '2025', label: 'agentic-dev', color: '#ff6b35' },
+                ].map((item, i) => (
+                  <div key={i} className="text-center">
+                    <div className="w-3 h-3 rounded-full mx-auto mb-2" style={{ backgroundColor: item.color }} />
+                    <div className="font-mono text-sm text-[#f0f0f5]">{item.year}</div>
+                    <div className="text-[0.7rem] text-[#5a5a6e] mt-1">{item.label}</div>
                   </div>
-                );
-              })}
-            </div>
-            <div className="mt-10 p-6 bg-[rgba(24,24,32,0.4)] border border-white/[0.06] rounded-2xl">
-              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[#5a5a6e]">
-                <span className="font-mono text-[#22d3ee]">Lab</span>
-                <span>forscht</span>
-                <ArrowRight size={14} className="text-[#5a5a6e]" />
-                <span className="font-mono text-[#ff6b35]">Dev</span>
-                <span>baut</span>
-                <ArrowRight size={14} className="text-[#5a5a6e]" />
-                <span className="font-mono text-[#ffa726]">Studio</span>
-                <span>produziert</span>
+                ))}
               </div>
             </div>
           </div>
@@ -406,19 +350,18 @@ function App() {
         <section id="contact" className="py-24 border-t border-white/[0.08]">
           <div className="max-w-[1000px] mx-auto px-8">
             <div className="max-w-[650px] mx-auto p-12 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center">
-              <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Bereit für lokale AI?</h2>
+              <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Let's build.</h2>
               <p className="text-[#9999aa] mb-8">
-                15 Minuten reichen, um zu klären, ob und wie ich dir helfen kann.
-                Kein Sales-Pitch, nur ehrliche Beratung.
+                Alle unsere Projekte sind Open Source. Schau dir den Code an, öffne Issues, oder bau mit uns.
               </p>
               <div className="flex flex-col items-center gap-4">
                 <a
-                  href={heroData.cta_href}
+                  href="https://github.com/agentic-dev-io"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
                 >
-                  {heroData.cta_text} <ArrowRight size={18} />
+                  GitHub Org <ArrowRight size={18} />
                 </a>
                 <div className="flex gap-8 mt-4">
                   <a href="mailto:hello@agentic-dev.io" className="text-sm text-[#5a5a6e] hover:text-[#f0f0f5] transition-colors">
@@ -429,12 +372,6 @@ function App() {
                   </a>
                 </div>
               </div>
-              <p className="mt-8 pt-6 border-t border-white/[0.08] text-sm text-[#5a5a6e]">
-                Für größere Projekte (Enterprise, Custom Development) →{' '}
-                <a href="mailto:hello@agentic-dev.io" className="text-[#ff6b35] hover:underline">
-                  lass uns reden
-                </a>
-              </p>
             </div>
           </div>
         </section>
@@ -443,7 +380,7 @@ function App() {
       {/* Footer */}
       <footer className="py-8 border-t border-white/[0.08]">
         <div className="max-w-[1000px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-[#5a5a6e]">© 2026 agentic-dev.io · Björn · Deutschland</p>
+          <p className="text-sm text-[#5a5a6e]">© 2026 agentic-dev.io · agentic-dev Team · Deutschland</p>
           <div className="flex gap-8">
             <a href="https://github.com/agentic-dev-io" target="_blank" rel="noopener noreferrer" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
               GitHub
