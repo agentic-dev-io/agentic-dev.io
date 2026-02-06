@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Check, ArrowRight, ExternalLink } from 'lucide-react';
+import { Check, ArrowRight, ExternalLink, Menu, X } from 'lucide-react';
 
 import heroData from '@content/hero.json';
 import projectsData from '@content/projects.json';
 import stackData from '@content/stack.json';
 import servicesData from '@content/services.json';
 import aboutData from '@content/about.json';
-import ecosystemData from '@shared/ecosystem.json';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -23,8 +23,6 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const currentSiteId = 'agentic-dev';
 
   return (
     <div className="min-h-screen bg-[#050508] text-[#f0f0f5] overflow-x-hidden">
@@ -59,7 +57,7 @@ function App() {
           }}
         />
         <div
-          className="absolute rounded-full blur-[100px]"
+          className="hidden sm:block absolute rounded-full blur-[100px]"
           style={{
             width: '500px', height: '500px',
             background: 'radial-gradient(circle, rgba(255, 167, 38, 0.12) 0%, transparent 70%)',
@@ -69,7 +67,7 @@ function App() {
           }}
         />
         <div
-          className="absolute rounded-full blur-[100px]"
+          className="hidden sm:block absolute rounded-full blur-[100px]"
           style={{
             width: '400px', height: '400px',
             background: 'radial-gradient(circle, rgba(77, 208, 225, 0.1) 0%, transparent 70%)',
@@ -93,8 +91,8 @@ function App() {
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
-        <div className="max-w-[1000px] mx-auto px-8">
-          <div className="flex justify-between items-center px-6 py-3 bg-[#050508]/70 backdrop-blur-xl border border-white/[0.08] rounded-full">
+        <div className="max-w-[1000px] mx-auto px-4 sm:px-8">
+          <div className="flex justify-between items-center px-4 sm:px-6 py-3 bg-[#050508]/70 backdrop-blur-xl border border-white/[0.08] rounded-full">
             <a href="/" className="flex items-center gap-2 font-mono text-base font-medium text-[#f0f0f5] no-underline">
               <span className="w-2 h-2 bg-[#ff6b35] rounded-full animate-pulse" />
               agentic-dev.io
@@ -112,15 +110,35 @@ function App() {
                 GitHub
               </a>
             </div>
+            <button className="md:hidden text-[#f0f0f5]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
           </div>
+          {isMenuOpen && (
+            <div className="md:hidden mt-2 px-6 py-4 bg-[#050508]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl mx-4">
+              <div className="flex flex-col gap-3">
+                <button onClick={() => { scrollToSection('projects'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] transition-colors py-2">
+                  Projekte
+                </button>
+                <a
+                  href="https://github.com/agentic-dev-io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] rounded-full text-[#050508] font-semibold text-sm text-center hover:opacity-90 transition-opacity"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
       <main className="relative z-10">
         <section className="min-h-screen flex items-center pt-24 pb-16">
-          <div className="max-w-[1000px] mx-auto px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               {/* Hero Content */}
               <div>
                 <h1 className="text-[clamp(2.2rem,4vw,3rem)] font-semibold leading-tight mb-6 font-['Fraunces'] tracking-tight">
@@ -147,7 +165,7 @@ function App() {
                   href={heroData.cta_href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
                 >
                   {heroData.cta_text} <ArrowRight size={18} />
                 </a>
@@ -192,8 +210,8 @@ function App() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
+        <section id="projects" className="py-12 md:py-24 border-t border-white/[0.08]">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4 font-mono">Open Source</div>
             <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Unsere Projekte</h2>
             <p className="text-lg text-[#9999aa] mb-10 max-w-[700px]">
@@ -237,8 +255,8 @@ function App() {
         </section>
 
         {/* Stack Section */}
-        <section className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
+        <section className="py-12 md:py-24 border-t border-white/[0.08]">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Tech Stack</h2>
             <p className="text-lg text-[#9999aa] mb-8">Die Technologien hinter unseren Projekten.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -253,8 +271,8 @@ function App() {
         </section>
 
         {/* Capabilities Section */}
-        <section id="capabilities" className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
+        <section id="capabilities" className="py-12 md:py-24 border-t border-white/[0.08]">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Was wir bauen</h2>
             <p className="text-lg text-[#9999aa] mb-8">Drei Bereiche, ein Fokus: AI Agents die wirklich funktionieren.</p>
             <div className="grid md:grid-cols-3 gap-6">
@@ -286,48 +304,26 @@ function App() {
         </section>
 
         {/* About Section */}
-        <section className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
+        <section className="py-12 md:py-24 border-t border-white/[0.08]">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold mb-8 font-['Fraunces']">{aboutData.title}</h2>
-            <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-start">
-              <div>
-                {aboutData.metadata.paragraphs.map((p, i) => (
-                  <p key={i} className="text-[#9999aa] mb-4" dangerouslySetInnerHTML={{ __html: p }} />
+            <div>
+              {aboutData.metadata.paragraphs.map((p, i) => (
+                <p key={i} className="text-[#9999aa] mb-4" dangerouslySetInnerHTML={{ __html: p }} />
+              ))}
+              <div className="flex flex-wrap gap-4 mt-6">
+                {aboutData.metadata.links.map((link, i) => (
+                  <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-[rgba(24,24,32,0.6)] border border-white/[0.08] rounded-lg text-sm text-[#9999aa] hover:border-[#ff6b35] hover:text-[#f0f0f5] transition-all">
+                    {link.label}
+                  </a>
                 ))}
-                <div className="flex flex-wrap gap-4 mt-6">
-                  {aboutData.metadata.links.map((link, i) => (
-                    <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-[rgba(24,24,32,0.6)] border border-white/[0.08] rounded-lg text-sm text-[#9999aa] hover:border-[#ff6b35] hover:text-[#f0f0f5] transition-all">
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <div className="p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl">
-                  <h3 className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4">Partner</h3>
-                  {ecosystemData.filter(org => org.org_id !== currentSiteId).map((org, i) => (
-                    <a
-                      key={i}
-                      href={org.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 py-3 border-b border-white/[0.08] last:border-0 group"
-                    >
-                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: org.color }} />
-                      <div>
-                        <div className="font-mono text-sm text-[#f0f0f5] group-hover:text-[#ff6b35] transition-colors">{org.name}</div>
-                        <div className="text-xs text-[#5a5a6e]">{org.role}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
               </div>
             </div>
 
             {/* Timeline */}
             <div className="mt-12 p-6 bg-[rgba(24,24,32,0.4)] border border-white/[0.06] rounded-2xl">
               <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-6 font-mono">Evolution</div>
-              <div className="grid grid-cols-5 gap-4">
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
                 {[
                   { year: '2004', label: 'Blender Origin', color: '#9999aa' },
                   { year: '2008', label: 'VWAG Partner', color: '#22d3ee' },
@@ -347,9 +343,9 @@ function App() {
         </section>
 
         {/* CTA Section */}
-        <section id="contact" className="py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-8">
-            <div className="max-w-[650px] mx-auto p-12 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center">
+        <section id="contact" className="py-12 md:py-24 border-t border-white/[0.08]">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-[650px] mx-auto p-6 md:p-12 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center">
               <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Let's build.</h2>
               <p className="text-[#9999aa] mb-8">
                 Alle unsere Projekte sind Open Source. Schau dir den Code an, öffne Issues, oder bau mit uns.
@@ -379,7 +375,7 @@ function App() {
 
       {/* Footer */}
       <footer className="py-8 border-t border-white/[0.08]">
-        <div className="max-w-[1000px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[#5a5a6e]">© 2026 agentic-dev.io · agentic-dev Team · Deutschland</p>
           <div className="flex gap-8">
             <a href="https://github.com/agentic-dev-io" target="_blank" rel="noopener noreferrer" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
