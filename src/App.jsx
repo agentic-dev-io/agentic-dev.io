@@ -188,11 +188,11 @@ function App() {
                 <div className="p-6 font-mono text-sm leading-relaxed">
                   {[
                     { cmd: 'ollama', args: 'run llama3', color: '#f0f0f5' },
-                    { text: '→ Loading model...', color: '#9999aa' },
-                    { text: '→ n8n: workflows connected', color: '#9999aa' },
-                    { text: '→ ComfyUI: pipeline ready', color: '#9999aa' },
-                    { text: '✓ Local AI stack online.', color: '#26ffd4', success: true },
-                    { text: '✓ Keine Cloud. Keine Kosten.', color: '#26ffd4', success: true, cursor: true }
+                    { text: '→ pulling manifest...', color: '#9999aa' },
+                    { text: '→ loading 8B parameters...', color: '#9999aa' },
+                    { text: '→ ready (localhost:11434)', color: '#9999aa' },
+                    { text: '✓ Dein Modell läuft lokal.', color: '#26ffd4', success: true },
+                    { text: '✓ Keine Cloud. Keine API-Kosten.', color: '#26ffd4', success: true, cursor: true }
                   ].map((line, i) => (
                     <div
                       key={i}
