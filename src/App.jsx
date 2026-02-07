@@ -189,8 +189,8 @@ function App() {
                   {[
                     { cmd: 'mcp', args: 'serve --agent mao', color: '#f0f0f5' },
                     { text: '→ Loading MCP tools...', color: '#9999aa' },
-                    { text: '→ agent-farm: 175 macros ready', color: '#9999aa' },
-                    { text: '→ Connecting vector stores...', color: '#9999aa' },
+                    { text: '→ agent-farm: swarm initialized', color: '#9999aa' },
+                    { text: '→ MCP tools connected', color: '#9999aa' },
                     { text: '✓ Multi-agent swarm online.', color: '#26ffd4', success: true },
                     { text: '✓ Open Source. Built to ship.', color: '#26ffd4', success: true, cursor: true }
                   ].map((line, i) => (
@@ -342,9 +342,9 @@ function App() {
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
                 {[
                   { year: '2004', label: 'Blender Origin', color: '#9999aa' },
-                  { year: '2008', label: 'VWAG Partner', color: '#22d3ee' },
+                  { year: '2008', label: 'VWAG Projekte', color: '#22d3ee' },
                   { year: '2014', label: 'Neural Research', color: '#a78bfa' },
-                  { year: '2024', label: 'Rust & Agents', color: '#ffa726' },
+                  { year: '2024', label: 'AI Agents', color: '#ffa726' },
                   { year: '2025', label: 'agentic-dev', color: '#ff6b35' },
                 ].map((item, i) => (
                   <div key={i} className="text-center">
