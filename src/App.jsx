@@ -101,6 +101,9 @@ function App() {
               <button onClick={() => scrollToSection('projects')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">
                 Projekte
               </button>
+              <button onClick={() => scrollToSection('contact')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">
+                Kontakt
+              </button>
               <a
                 href="https://github.com/agentic-dev-io"
                 target="_blank"
@@ -119,6 +122,9 @@ function App() {
               <div className="flex flex-col gap-3">
                 <button onClick={() => { scrollToSection('projects'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] transition-colors py-2">
                   Projekte
+                </button>
+                <button onClick={() => { scrollToSection('contact'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] transition-colors py-2">
+                  Kontakt
                 </button>
                 <a
                   href="https://github.com/agentic-dev-io"
@@ -387,12 +393,12 @@ function App() {
       <footer className="py-8 border-t border-white/[0.08]">
         <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[#5a5a6e]">© 2026 agentic-dev.io · agentic-dev Team · Deutschland</p>
-          <div className="flex gap-8">
-            <a href="https://github.com/agentic-dev-io" target="_blank" rel="noopener noreferrer" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
-              GitHub
-            </a>
+          <div className="flex flex-wrap justify-center gap-8">
             <a href="mailto:hello@agentic-dev.io" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
               Kontakt
+            </a>
+            <a href="https://www.linkedin.com/in/bj%C3%B6rn-bethge-a0754a329" target="_blank" rel="noopener noreferrer" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
+              LinkedIn
             </a>
             <a href="/impressum.html" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
               Impressum & Datenschutz
