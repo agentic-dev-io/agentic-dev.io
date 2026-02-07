@@ -187,11 +187,11 @@ function App() {
                 </div>
                 <div className="p-6 font-mono text-sm leading-relaxed">
                   {[
-                    { cmd: 'mcp', args: 'serve --agent mao', color: '#f0f0f5' },
-                    { text: '→ Loading MCP tools...', color: '#9999aa' },
-                    { text: '→ agent-farm: swarm initialized', color: '#9999aa' },
-                    { text: '→ MCP tools connected', color: '#9999aa' },
-                    { text: '✓ Multi-agent swarm online.', color: '#26ffd4', success: true },
+                    { cmd: 'mao', args: 'start --swarm agent-farm', color: '#f0f0f5' },
+                    { text: '→ Loading agents...', color: '#9999aa' },
+                    { text: '→ mcp-adpa: code analysis ready', color: '#9999aa' },
+                    { text: '→ mcp-b: bridge connected', color: '#9999aa' },
+                    { text: '✓ 3 agents online. Swarm active.', color: '#26ffd4', success: true },
                     { text: '✓ Open Source. Built to ship.', color: '#26ffd4', success: true, cursor: true }
                   ].map((line, i) => (
                     <div
