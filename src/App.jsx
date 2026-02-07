@@ -251,6 +251,16 @@ function App() {
                 </a>
               ))}
             </div>
+            <div className="mt-10 text-center">
+              <a
+                href="https://github.com/orgs/agentic-dev-io/repositories?type=public"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-[#9999aa] hover:text-[#ff6b35] transition-colors font-mono"
+              >
+                Alle Repositories ansehen <ExternalLink size={14} />
+              </a>
+            </div>
           </div>
         </section>
 
