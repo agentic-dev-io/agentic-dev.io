@@ -10,6 +10,14 @@ import aboutData from '@content/about.json';
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Nachricht von ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+    window.location.href = `mailto:hello@agentic-dev.io?subject=${subject}&body=${body}`;
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -177,7 +185,7 @@ function App() {
                 </a>
               </div>
 
-              {/* Terminal */}
+              {/* Terminal → Contact */}
               <div className="bg-[#0a0a0f]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.5)]">
                 <div className="flex items-center gap-2 px-4 py-3 bg-white/[0.03] border-b border-white/[0.08]">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -185,7 +193,7 @@ function App() {
                   <div className="w-3 h-3 rounded-full bg-[#28c840]" />
                   <div className="flex-1 text-center font-mono text-xs text-[#5a5a6e]">agentic-dev.sh</div>
                 </div>
-                <div className="p-6 font-mono text-sm leading-relaxed">
+                <div className="p-6 pb-3 font-mono text-sm leading-relaxed">
                   {[
                     { cmd: 'ollama', args: 'run lfm2.5-thinking', color: '#f0f0f5' },
                     { text: 'pulling manifest', color: '#9999aa' },
@@ -194,7 +202,6 @@ function App() {
                     { text: 'verifying sha256 digest', color: '#9999aa' },
                     { text: 'writing manifest', color: '#9999aa' },
                     { text: 'success', color: '#26ffd4', success: true },
-                    { text: '>>> Send a message (/? for help)', color: '#26ffd4', success: true, cursor: true }
                   ].map((line, i) => (
                     <div
                       key={i}
@@ -208,10 +215,59 @@ function App() {
                       {line.cmd && <span className="text-[#f0f0f5]">{line.cmd} </span>}
                       {line.args && <span className="text-[#ffa726]">{line.args}</span>}
                       {line.text && <span style={{ color: line.color }}>{line.text}</span>}
-                      {line.cursor && <span className="inline-block w-2 h-4 bg-[#ff6b35] ml-1 animate-[blink_1s_step-end_infinite]" />}
                     </div>
                   ))}
                 </div>
+                <form
+                  onSubmit={handleContactSubmit}
+                  className="px-6 pb-6 font-mono text-sm opacity-0 border-t border-white/[0.06]"
+                  style={{ animation: 'typeLine 0.8s ease forwards', animationDelay: '5.5s' }}
+                >
+                  <div className="pt-4 mb-4 text-[#26ffd4] text-xs">
+                    {'>>>'} Send a message
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#5a5a6e] shrink-0 w-12">name:</span>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="bg-transparent border-none outline-none text-[#f0f0f5] font-mono text-sm flex-1 min-w-0 placeholder-[#333340]"
+                        placeholder="..."
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#5a5a6e] shrink-0 w-12">email:</span>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="bg-transparent border-none outline-none text-[#f0f0f5] font-mono text-sm flex-1 min-w-0 placeholder-[#333340]"
+                        placeholder="..."
+                      />
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-[#5a5a6e] shrink-0 w-12 pt-0.5">msg:</span>
+                      <textarea
+                        required
+                        rows={2}
+                        value={formData.message}
+                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        className="bg-transparent border-none outline-none text-[#f0f0f5] font-mono text-sm flex-1 min-w-0 resize-none placeholder-[#333340]"
+                        placeholder="..."
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="mt-4 px-5 py-2 bg-[#26ffd4]/10 border border-[#26ffd4]/30 text-[#26ffd4] rounded-lg text-xs font-semibold hover:bg-[#26ffd4]/20 transition-colors"
+                  >
+                    $ send <span className="inline-block w-1.5 h-3.5 bg-[#ff6b35] ml-1 animate-[blink_1s_step-end_infinite]" />
+                  </button>
+                </form>
               </div>
             </div>
           </div>
