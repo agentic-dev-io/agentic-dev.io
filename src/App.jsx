@@ -187,12 +187,14 @@ function App() {
                 </div>
                 <div className="p-6 font-mono text-sm leading-relaxed">
                   {[
-                    { cmd: 'ollama', args: 'run llama3', color: '#f0f0f5' },
+                    { cmd: 'ollama', args: 'run lfm2.5-thinking', color: '#f0f0f5' },
                     { text: 'pulling manifest', color: '#9999aa' },
-                    { text: 'pulling a7b191... ▕████████████████▏ 4.7 GB', color: '#9999aa' },
+                    { text: 'pulling a7b19185f316: 100% ▕████████████████▏ 731 MB', color: '#9999aa' },
+                    { text: 'pulling 55a61add4838: 100% ▕████████████████▏  10 KB', color: '#9999aa' },
                     { text: 'verifying sha256 digest', color: '#9999aa' },
+                    { text: 'writing manifest', color: '#9999aa' },
                     { text: 'success', color: '#26ffd4', success: true },
-                    { text: '>>> Dein Modell. Lokal. Privat.', color: '#26ffd4', success: true, cursor: true }
+                    { text: '>>> Send a message (/? for help)', color: '#26ffd4', success: true, cursor: true }
                   ].map((line, i) => (
                     <div
                       key={i}
