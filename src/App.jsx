@@ -187,12 +187,12 @@ function App() {
                 </div>
                 <div className="p-6 font-mono text-sm leading-relaxed">
                   {[
-                    { cmd: 'mao', args: 'start --swarm agent-farm', color: '#f0f0f5' },
-                    { text: '→ Loading agents...', color: '#9999aa' },
-                    { text: '→ mcp-adpa: code analysis ready', color: '#9999aa' },
-                    { text: '→ mcp-b: bridge connected', color: '#9999aa' },
-                    { text: '✓ 3 agents online. Swarm active.', color: '#26ffd4', success: true },
-                    { text: '✓ Open Source. Built to ship.', color: '#26ffd4', success: true, cursor: true }
+                    { cmd: 'ollama', args: 'run llama3', color: '#f0f0f5' },
+                    { text: '→ Loading model...', color: '#9999aa' },
+                    { text: '→ n8n: workflows connected', color: '#9999aa' },
+                    { text: '→ ComfyUI: pipeline ready', color: '#9999aa' },
+                    { text: '✓ Local AI stack online.', color: '#26ffd4', success: true },
+                    { text: '✓ Keine Cloud. Keine Kosten.', color: '#26ffd4', success: true, cursor: true }
                   ].map((line, i) => (
                     <div
                       key={i}
