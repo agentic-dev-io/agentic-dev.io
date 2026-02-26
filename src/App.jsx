@@ -10,14 +10,6 @@ import aboutData from '@content/about.json';
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Nachricht von ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
-    window.location.href = `mailto:hello@agentic-dev.io?subject=${subject}&body=${body}`;
-  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -155,17 +147,7 @@ function App() {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               {/* Hero Content */}
               <div>
-                <h1 className="text-[clamp(2.2rem,4vw,3rem)] font-semibold leading-tight mb-6 font-['Fraunces'] tracking-tight">
-                  <span
-                    className="bg-gradient-to-r from-[#ff6b35] via-[#ffa726] to-[#26ffd4] bg-clip-text text-transparent"
-                    style={{ backgroundSize: '200% 200%', animation: 'gradientShift 8s ease-in-out infinite' }}
-                  >
-                    {heroData.title.split('\n')[0]}
-                  </span>
-                  <br />
-                  {heroData.title.split('\n')[1]}
-                </h1>
-                <p className="text-[1.15rem] text-[#9999aa] mb-6 leading-relaxed">
+                <p className="text-[1.25rem] text-[#f0f0f5] mb-6 leading-relaxed">
                   {heroData.description}
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8">
@@ -218,56 +200,18 @@ function App() {
                     </div>
                   ))}
                 </div>
-                <form
-                  onSubmit={handleContactSubmit}
-                  className="px-6 pb-6 font-mono text-sm opacity-0 border-t border-white/[0.06]"
+                <a
+                  href="mailto:hello@agentic-dev.io"
+                  className="block px-6 pb-6 font-mono text-sm opacity-0 hover:bg-white/[0.02] transition-colors"
                   style={{ animation: 'typeLine 0.8s ease forwards', animationDelay: '5.5s' }}
                 >
-                  <div className="pt-4 mb-4 text-[#26ffd4] text-xs">
-                    {'>>>'} Send a message
+                  <div className="pt-4 text-[#26ffd4] text-xs flex items-center gap-2">
+                    <span>{'>>>'}</span>
+                    <span className="text-[#f0f0f5]">hello@agentic-dev.io</span>
+                    <span className="inline-block w-1.5 h-3.5 bg-[#ff6b35] animate-[blink_1s_step-end_infinite]" />
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#5a5a6e] shrink-0 w-12">name:</span>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="bg-transparent border-none outline-none text-[#f0f0f5] font-mono text-sm flex-1 min-w-0 placeholder-[#333340]"
-                        placeholder="..."
-                      />
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#5a5a6e] shrink-0 w-12">email:</span>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="bg-transparent border-none outline-none text-[#f0f0f5] font-mono text-sm flex-1 min-w-0 placeholder-[#333340]"
-                        placeholder="..."
-                      />
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-[#5a5a6e] shrink-0 w-12 pt-0.5">msg:</span>
-                      <textarea
-                        required
-                        rows={2}
-                        value={formData.message}
-                        onChange={(e) => setFormData({...formData, message: e.target.value})}
-                        className="bg-transparent border-none outline-none text-[#f0f0f5] font-mono text-sm flex-1 min-w-0 resize-none placeholder-[#333340]"
-                        placeholder="..."
-                      />
-                    </div>
-                  </div>
-                  <button
-                    type="submit"
-                    className="mt-4 px-5 py-2 bg-[#26ffd4]/10 border border-[#26ffd4]/30 text-[#26ffd4] rounded-lg text-xs font-semibold hover:bg-[#26ffd4]/20 transition-colors"
-                  >
-                    $ send <span className="inline-block w-1.5 h-3.5 bg-[#ff6b35] ml-1 animate-[blink_1s_step-end_infinite]" />
-                  </button>
-                </form>
+                  <div className="mt-3 text-[#5a5a6e] text-xs">Klicken um E-Mail zu öffnen</div>
+                </a>
               </div>
             </div>
           </div>
