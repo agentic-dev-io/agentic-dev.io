@@ -1,5 +1,7 @@
 # agentic-dev.io
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N71WOHZ3)
+
 **Agentic Systems & AI Development**
 
 [\![Live](https://img.shields.io/badge/agentic--dev.io-live-blue?style=flat-square)](https://agentic-dev.io)
@@ -22,4 +24,3 @@ npm run preview  # Preview build on port 4173
 ## License
 
 [MIT Ethical Use](LICENSE)
-
