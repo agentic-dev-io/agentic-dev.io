@@ -1,5 +1,7 @@
 # agentic-dev.io
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N71WOHZ3)
+
 **Agentic Systems & AI Development**
 
 [\![Live](https://img.shields.io/badge/agentic--dev.io-live-blue?style=flat-square)](https://agentic-dev.io)
@@ -13,6 +15,8 @@
 Deutsch ist unter `/` und Englisch unter `/en/` verfügbar. Die englischen CMS-Texte stehen ergänzend in `src/english.js`; Impressum und Datenschutz sind in beiden Sprachen verfügbar; die englische Fassung verweist auf das deutsche Original.
 
 ## Development
+
+Der GitHub-Pages-Build benötigt das Repository-Secret `CMS_DEPLOY_KEY`: einen privaten SSH-Deploy-Key mit ausschließlich lesendem Zugriff auf `agentic-dev-io/cms`.
 
 ```bash
 npm install
