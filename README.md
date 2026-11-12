@@ -19,7 +19,7 @@ npm run build    # Production build → dist/
 npm run preview  # Preview build on port 4173
 ```
 
-Hero, Leistungen einschließlich Workshops, Projekte und Vorstellung werden im CMS gepflegt und mit `uv run cms export --site agentic-dev` aus dem CMS-Verzeichnis exportiert. Die Seite nutzt eine dunkle redaktionelle Gestaltung mit schieferblauer Palette nach der Designvorlage; Einsatzbeispiele, der Ablauf im Ansatz und der Kontakttext stehen in `src/App.jsx`.
+Hero, Leistungen einschließlich Workshops, Projekte und Vorstellung werden im CMS gepflegt und mit `uv run cms export --site agentic-dev` aus dem CMS-Verzeichnis exportiert. Angebot und Projekte verwenden einzelne Karten mit einheitlichen Abständen und Rundungen. Die Seite nutzt eine dunkle redaktionelle Gestaltung mit schieferblauer Palette nach der Designvorlage; Einsatzbeispiele, der Ablauf im Ansatz und der Kontakttext stehen in `src/App.jsx`.
 
 Die technische Bestandsaufnahme zum AI Act steht in `docs/ai-act-website-sichtung.md`.
 
