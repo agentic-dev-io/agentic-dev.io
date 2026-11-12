@@ -98,7 +98,7 @@ function App() {
         </section>
 
         <section className="section-rail contact-section" id="contact">
-          <div className="layout section-inner"><p className="section-label">06 / Kontakt</p><h2>Eine Aufgabe<span className="accent">.</span><br /><span>Ein guter Anfang.</span></h2><p>Sie möchten Agenten in Ihren Arbeitsprozess einbinden oder einen bestehenden Prototyp weiterentwickeln? Erzählen Sie mir, woran Sie arbeiten.</p><a className="button-primary" href={mailtoLink(EMAIL_DOMAIN)}>Projekt besprechen <Mail size={18} aria-hidden="true" /></a><a className="contact-email" href={mailtoLink(EMAIL_DOMAIN)}>{getEmail(EMAIL_DOMAIN)}</a></div>
+          <div className="layout section-inner"><p className="section-label">06 / Kontakt</p><h2>Eine Aufgabe<span className="accent">.</span><br /><span>Ein guter Anfang.</span></h2><p>Sie möchten ein agentisches System entwickeln, in bestehende Prozesse integrieren oder einen Prototyp weiterentwickeln? Erzählen Sie mir, welche Aufgabe Sie lösen möchten.</p><a className="button-primary" href={mailtoLink(EMAIL_DOMAIN)}>Projekt besprechen <Mail size={18} aria-hidden="true" /></a><a className="contact-email" href={mailtoLink(EMAIL_DOMAIN)}>{getEmail(EMAIL_DOMAIN)}</a></div>
         </section>
       </main>
       <footer className="site-footer"><div className="layout footer-inner"><span>© {new Date().getFullYear()} agentic-dev.io · Björn Bethge</span><nav aria-label="Rechtliches und Kontakt"><a href={mailtoLink(EMAIL_DOMAIN)}>Kontakt</a><a href="https://github.com/agentic-dev-io" target="_blank" rel="noopener noreferrer">GitHub</a><a href="/impressum.html">Impressum &amp; Datenschutz</a></nav></div></footer>
