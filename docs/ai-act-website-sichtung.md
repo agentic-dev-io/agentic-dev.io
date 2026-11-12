@@ -6,7 +6,7 @@ Stand: 12. November 2026. Umfang: lokale Quellstände von synapticore.io, synapt
 
 - In den untersuchten Website-Quelltexten wurde kein KI-Chat, Modellaufruf oder direkter Aufruf einer KI-Inferenz-API gefunden. Die Angebotsbeschreibungen sprechen über KI, stellen für sich genommen aber kein interaktives KI-System dar.
 - Der Roboter auf synapticore.studio ist eine lokal gerenderte Three.js-Animation. Seine Begrüßung und Zeigerreaktion beruhen auf vorgegebenen Animationen und Gelenkberechnungen in `src/RobotGuide.jsx`; sie rufen kein KI-Modell auf.
-- Die „World“-Medien sind laut Auskunft des Betreibers Blender-Bilder und -Videos, nicht generativ durch KI erstellt oder verändert. `world/world.js` und `src/lib/scrub-engine.js` spielen die angegebenen Medien ab. Eine eigenständige Prüfung der Entstehung jeder Datei war nicht Bestandteil der Sichtung.
+- Der Studio-Scroll-Prototyp „World“ ist nicht Teil des Website-Builds. Die später lokal untersuchten Testbilder enthielten FFmpeg-Testmuster; die vorgesehenen Blender-Szenen waren darin noch nicht enthalten. Vor einer erneuten Aufnahme die Herkunft der tatsächlich verwendeten Medien prüfen.
 - Aus diesem technischen Befund ergibt sich für die vorhandene Roboteranimation keine KI-Interaktionskennzeichnung allein aufgrund ihrer Mausreaktion. Der Befund ist keine allgemeine Aussage über alle künftigen Medien und Funktionen.
 
 ## Wiedervorlage

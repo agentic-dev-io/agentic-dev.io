@@ -10,6 +10,8 @@
 - Content from DuckDB CMS (build-time JSON, zero runtime overhead)
 - Deployed via GitHub Pages + GitHub Actions
 
+Deutsch ist unter `/` und Englisch unter `/en/` verfügbar. Die englischen CMS-Texte stehen ergänzend in `src/english.js`; Impressum und Datenschutz sind in beiden Sprachen verfügbar; die englische Fassung verweist auf das deutsche Original.
+
 ## Development
 
 ```bash
