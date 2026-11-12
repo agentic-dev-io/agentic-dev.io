@@ -19,6 +19,8 @@ npm run build    # Production build → dist/
 npm run preview  # Preview build on port 4173
 ```
 
+Leistungen, Projekte und Vorstellung werden im CMS gepflegt und mit `uv run cms export --site agentic-dev` aus dem CMS-Verzeichnis exportiert.
+
 ## License
 
 [MIT Ethical Use](LICENSE)

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Check, ArrowRight, ExternalLink, Menu, X } from 'lucide-react';
 
+
 import heroData from '@content/hero.json';
 import projectsData from '@content/projects.json';
 import stackData from '@content/stack.json';
@@ -147,6 +148,8 @@ function App() {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               {/* Hero Content */}
               <div>
+                <p className="font-mono text-sm text-[#26ffd4] uppercase tracking-widest mb-4">Agentic Systems & AI Development</p>
+                <h1 className="text-5xl sm:text-6xl font-semibold leading-tight tracking-tight font-['Fraunces'] mb-6">Agenten, die <span className="text-[#ff6b35]">liefern.</span></h1>
                 <p className="text-[1.25rem] text-[#f0f0f5] mb-6 leading-relaxed">
                   {heroData.description}
                 </p>
@@ -159,8 +162,6 @@ function App() {
                 </div>
                 <a
                   href={heroData.cta_href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
                 >
                   {heroData.cta_text} <ArrowRight size={18} />
@@ -217,13 +218,46 @@ function App() {
           </div>
         </section>
 
+        {/* Capabilities Section */}
+        <section id="capabilities" className="py-12 md:py-24 border-t border-white/[0.08]">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Was ich anbiete</h2>
+            <p className="text-lg text-[#9999aa] mb-8">Für Teams, die Agenten mit ihren Systemen verbinden und Prototypen zuverlässig weiterentwickeln möchten.</p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {servicesData.map((service, i) => (
+                <div
+                  key={i}
+                  className={`p-8 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border rounded-2xl relative hover:border-white/[0.15] transition-all ${
+                    service.metadata.featured ? 'border-[#ff6b35]' : 'border-white/[0.08]'
+                  }`}
+                >
+                  {service.metadata.featured && (
+                    <span className="absolute -top-3 right-5 px-3 py-1 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] text-xs font-semibold rounded-full">
+                      Core
+                    </span>
+                  )}
+                  <h3 className="text-lg font-semibold mb-2">{service.icon} {service.title}</h3>
+                  <p className="text-sm text-[#9999aa] mb-4">{service.description}</p>
+                  <ul className="space-y-2">
+                    {service.features.map((feat, j) => (
+                      <li key={j} className="flex items-center gap-2 text-sm text-[#9999aa]">
+                        <Check size={14} className="text-[#26ffd4] flex-shrink-0" /> {feat}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Projects Section */}
         <section id="projects" className="py-12 md:py-24 border-t border-white/[0.08]">
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4 font-mono">Open Source</div>
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Unsere Projekte</h2>
+            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Ausgewählte Projekte</h2>
             <p className="text-lg text-[#9999aa] mb-10 max-w-[700px]">
-              Frameworks, Tools und Plugins die wir selbst bauen und benutzen.
+              Eigene Open-Source-Projekte zeigen, wie Agenten, Daten und Werkzeuge zusammenarbeiten.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projectsData.map((project, i) => (
@@ -288,39 +322,6 @@ function App() {
           </div>
         </section>
 
-        {/* Capabilities Section */}
-        <section id="capabilities" className="py-12 md:py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Was wir bauen</h2>
-            <p className="text-lg text-[#9999aa] mb-8">Drei Bereiche, ein Fokus: AI Agents die wirklich funktionieren.</p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {servicesData.map((service, i) => (
-                <div
-                  key={i}
-                  className={`p-8 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border rounded-2xl relative hover:border-white/[0.15] transition-all ${
-                    service.metadata.featured ? 'border-[#ff6b35]' : 'border-white/[0.08]'
-                  }`}
-                >
-                  {service.metadata.featured && (
-                    <span className="absolute -top-3 right-5 px-3 py-1 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] text-xs font-semibold rounded-full">
-                      Core
-                    </span>
-                  )}
-                  <h3 className="text-lg font-semibold mb-2">{service.icon} {service.title}</h3>
-                  <p className="text-sm text-[#9999aa] mb-4">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feat, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-[#9999aa]">
-                        <Check size={14} className="text-[#26ffd4] flex-shrink-0" /> {feat}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* About Section */}
         <section className="py-12 md:py-24 border-t border-white/[0.08]">
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -364,18 +365,16 @@ function App() {
         <section id="contact" className="py-12 md:py-24 border-t border-white/[0.08]">
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-[650px] mx-auto p-6 md:p-12 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center">
-              <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Let's build.</h2>
+              <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Ihr KI-Prototyp soll weiter?</h2>
               <p className="text-[#9999aa] mb-8">
-                Alle unsere Projekte sind Open Source. Schau dir den Code an, öffne Issues, oder bau mit uns.
+                Schreiben Sie mir, welche Aufgabe Ihre Agenten übernehmen und welche Systeme sie dafür erreichen sollen.
               </p>
               <div className="flex flex-col items-center gap-4">
                 <a
-                  href="https://github.com/agentic-dev-io"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:hello@agentic-dev.io"
                   className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
                 >
-                  GitHub Org <ArrowRight size={18} />
+                  Projekt besprechen <ArrowRight size={18} />
                 </a>
                 <div className="flex gap-8 mt-4">
                   <a href="mailto:hello@agentic-dev.io" className="text-sm text-[#5a5a6e] hover:text-[#f0f0f5] transition-colors">
