@@ -9,6 +9,14 @@ Stand: 12. November 2026. Umfang: lokale Quellstände von synapticore.io, synapt
 - Die „World“-Medien sind laut Auskunft des Betreibers Blender-Bilder und -Videos, nicht generativ durch KI erstellt oder verändert. `world/world.js` und `src/lib/scrub-engine.js` spielen die angegebenen Medien ab. Eine eigenständige Prüfung der Entstehung jeder Datei war nicht Bestandteil der Sichtung.
 - Aus diesem technischen Befund ergibt sich für die vorhandene Roboteranimation keine KI-Interaktionskennzeichnung allein aufgrund ihrer Mausreaktion. Der Befund ist keine allgemeine Aussage über alle künftigen Medien und Funktionen.
 
+## Wiedervorlage
+
+- Bei jeder neuen KI-Funktion, jeder wesentlichen Änderung am Einsatzzweck und vor einer Veröffentlichung erneut prüfen, ob die Bestandsaufnahme noch zutrifft.
+- Zu Beginn jedes Kundenprojekts Einsatzzweck, Rollen und betroffene Personen aufnehmen; die Pflichten für das konkrete System separat beurteilen.
+- Bei generierten oder bearbeiteten Medien Herkunft und Zweck dokumentieren und die anwendbaren Transparenzregeln prüfen.
+- Vor der nächsten Beurteilung den aktuellen Gesetzestext und die Hinweise der EU-Kommission auf Änderungen prüfen; Daten und Ausnahmen nicht aus dieser Momentaufnahme fortschreiben.
+- Eigene betriebliche Nutzung von KI und gegebenenfalls KI-Kompetenz nach Artikel 4 gesondert betrachten.
+
 ## Bei Änderungen erneut prüfen
 
 - Bei Einbindung eines KI-Chats oder eines anderen direkt mit Menschen interagierenden KI-Systems Anwendungsbereich, Verantwortlichkeiten und gegebenenfalls den Hinweis auf die KI-Interaktion nach Artikel 50 prüfen. Die Verpflichtungen nach Artikel 50 gelten seit 2. August 2026: [EU-Kommission: Transparenzpflichten](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act).
