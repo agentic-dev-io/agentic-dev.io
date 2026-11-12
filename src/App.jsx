@@ -99,6 +99,7 @@ function App() {
               agentic-dev.io
             </a>
             <div className="hidden md:flex items-center gap-8">
+              <button onClick={() => scrollToSection('capabilities')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">Leistungen</button>
               <button onClick={() => scrollToSection('projects')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">
                 Projekte
               </button>
@@ -121,6 +122,7 @@ function App() {
           {isMenuOpen && (
             <div className="md:hidden mt-2 px-6 py-4 bg-[#050508]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl mx-4">
               <div className="flex flex-col gap-3">
+                <button onClick={() => { scrollToSection('capabilities'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] py-2">Leistungen</button>
                 <button onClick={() => { scrollToSection('projects'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] transition-colors py-2">
                   Projekte
                 </button>
@@ -223,7 +225,7 @@ function App() {
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Was ich anbiete</h2>
             <p className="text-lg text-[#9999aa] mb-8">Für Teams, die Agenten mit ihren Systemen verbinden und Prototypen zuverlässig weiterentwickeln möchten.</p>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               {servicesData.map((service, i) => (
                 <div
                   key={i}
