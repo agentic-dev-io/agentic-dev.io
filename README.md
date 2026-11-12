@@ -19,7 +19,7 @@ npm run build    # Production build → dist/
 npm run preview  # Preview build on port 4173
 ```
 
-Leistungen einschließlich Workshops, Projekte und Vorstellung werden im CMS gepflegt und mit `uv run cms export --site agentic-dev` aus dem CMS-Verzeichnis exportiert.
+Hero, Leistungen einschließlich Workshops, Projekte und Vorstellung werden im CMS gepflegt und mit `uv run cms export --site agentic-dev` aus dem CMS-Verzeichnis exportiert. Die Seite nutzt eine dunkle redaktionelle Gestaltung mit schieferblauer Palette nach der Designvorlage; Einsatzbeispiele und der Ablauf im Ansatz stehen in `src/App.jsx`.
 
 ## License
 

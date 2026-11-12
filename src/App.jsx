@@ -1,414 +1,107 @@
-import { useEffect, useState } from 'react';
-import { Check, ArrowRight, ExternalLink, Menu, X } from 'lucide-react';
-
-
+import { ArrowDownRight, ArrowRight, ExternalLink, Mail } from 'lucide-react';
+import { getEmail, mailtoLink } from './utils/email';
 import heroData from '@content/hero.json';
 import projectsData from '@content/projects.json';
-import stackData from '@content/stack.json';
 import servicesData from '@content/services.json';
 import aboutData from '@content/about.json';
 
+const EMAIL_DOMAIN = 'agentic-dev.io';
+const approach = [
+  ['01', 'Aufgabe', 'Wo hilft ein Agent wirklich? Wir klären den Ablauf, die Anforderungen und die Grenzen.'],
+  ['02', 'Verbindung', 'Werkzeuge und Daten werden so angebunden, dass der Agent im vorgesehenen Rahmen arbeiten kann.'],
+  ['03', 'Prüfung', 'Testfälle, Freigaben und nachvollziehbare Ergebnisse helfen Ihrem Team, das Verhalten zu beurteilen.'],
+  ['04', 'Übergabe', 'Code, Dokumentation und gemeinsames Arbeiten schaffen die Grundlage für die Weiterentwicklung.'],
+];
+const examples = [
+  ['Wissen & Recherche', 'Dokumente und interne Quellen auswerten, Ergebnisse mit Bezug auf ihre Grundlagen aufbereiten.'],
+  ['Entwicklung & Betrieb', 'Entwicklungsteams bei wiederkehrenden Aufgaben unterstützen und Werkzeuge in bestehende Abläufe einbinden.'],
+  ['Systeme & Daten', 'Informationen aus Datenbanken und Fachsoftware für einen konkreten Arbeitsprozess nutzbar machen.'],
+];
+
 function App() {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#050508] text-[#f0f0f5] overflow-x-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
-            maskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%)'
-          }}
-        />
-        <div
-          className="absolute rounded-full blur-[100px] animate-float"
-          style={{
-            width: '700px', height: '700px',
-            background: 'radial-gradient(circle, rgba(255, 107, 53, 0.25) 0%, transparent 70%)',
-            top: '-250px', right: '-150px',
-            animation: 'float 25s ease-in-out infinite'
-          }}
-        />
-        <div
-          className="absolute rounded-full blur-[100px]"
-          style={{
-            width: '600px', height: '600px',
-            background: 'radial-gradient(circle, rgba(38, 255, 212, 0.15) 0%, transparent 70%)',
-            bottom: '-200px', left: '-150px',
-            animation: 'float 25s ease-in-out infinite',
-            animationDelay: '-8s'
-          }}
-        />
-        <div
-          className="hidden sm:block absolute rounded-full blur-[100px]"
-          style={{
-            width: '500px', height: '500px',
-            background: 'radial-gradient(circle, rgba(255, 167, 38, 0.12) 0%, transparent 70%)',
-            top: '40%', left: '30%',
-            animation: 'float 25s ease-in-out infinite',
-            animationDelay: '-16s'
-          }}
-        />
-        <div
-          className="hidden sm:block absolute rounded-full blur-[100px]"
-          style={{
-            width: '400px', height: '400px',
-            background: 'radial-gradient(circle, rgba(77, 208, 225, 0.1) 0%, transparent 70%)',
-            top: '60%', right: '20%',
-            animation: 'float 25s ease-in-out infinite',
-            animationDelay: '-12s'
-          }}
-        />
-        {[...Array(7)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full"
-            style={{
-              left: `${10 + i * 12}%`,
-              animation: `rise ${20 + i * 3}s linear infinite`,
-              animationDelay: `${-i * 5}s`
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
-        <div className="max-w-[1000px] mx-auto px-4 sm:px-8">
-          <div className="flex justify-between items-center px-4 sm:px-6 py-3 bg-[#050508]/70 backdrop-blur-xl border border-white/[0.08] rounded-full">
-            <a href="/" className="flex items-center gap-2 font-mono text-base font-medium text-[#f0f0f5] no-underline">
-              <span className="w-2 h-2 bg-[#ff6b35] rounded-full animate-pulse" />
-              agentic-dev.io
-            </a>
-            <div className="hidden md:flex items-center gap-8">
-              <button onClick={() => scrollToSection('capabilities')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">Leistungen</button>
-              <button onClick={() => scrollToSection('projects')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">
-                Projekte
-              </button>
-              <button onClick={() => scrollToSection('contact')} className="text-[0.9rem] text-[#9999aa] hover:text-[#f0f0f5] transition-colors">
-                Kontakt
-              </button>
-              <a
-                href="https://github.com/agentic-dev-io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-2 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] rounded-full text-[#050508] font-semibold text-sm hover:opacity-90 transition-opacity"
-              >
-                GitHub
-              </a>
-            </div>
-            <button className="md:hidden text-[#f0f0f5]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-          </div>
-          {isMenuOpen && (
-            <div className="md:hidden mt-2 px-6 py-4 bg-[#050508]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl mx-4">
-              <div className="flex flex-col gap-3">
-                <button onClick={() => { scrollToSection('capabilities'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] py-2">Leistungen</button>
-                <button onClick={() => { scrollToSection('projects'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] transition-colors py-2">
-                  Projekte
-                </button>
-                <button onClick={() => { scrollToSection('contact'); setIsMenuOpen(false); }} className="text-left text-sm text-[#9999aa] hover:text-[#f0f0f5] transition-colors py-2">
-                  Kontakt
-                </button>
-                <a
-                  href="https://github.com/agentic-dev-io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-2 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] rounded-full text-[#050508] font-semibold text-sm text-center hover:opacity-90 transition-opacity"
-                >
-                  GitHub
-                </a>
-              </div>
-            </div>
-          )}
+    <div className="site-shell" id="start">
+      <header className="site-header">
+        <div className="layout header-inner">
+          <a className="wordmark" href="#start" aria-label="agentic-dev.io – zum Anfang">agentic-dev<span>.io</span></a>
+          <nav className="site-nav" aria-label="Hauptnavigation">
+            <a href="#approach">Ansatz</a><a href="#services">Leistungen</a><a href="#projects">Projekte</a><a href="#about">Über mich</a><a className="nav-contact" href="#contact">Kontakt <ArrowRight size={15} aria-hidden="true" /></a>
+          </nav>
         </div>
-      </nav>
-
-      {/* Hero Section */}
-      <main className="relative z-10">
-        <section className="min-h-screen flex items-center pt-24 pb-16">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-              {/* Hero Content */}
-              <div>
-                <p className="font-mono text-sm text-[#26ffd4] uppercase tracking-widest mb-4">Agentic Systems & AI Development</p>
-                <h1 className="text-5xl sm:text-6xl font-semibold leading-tight tracking-tight font-['Fraunces'] mb-6">Agenten, die <span className="text-[#ff6b35]">liefern.</span></h1>
-                <p className="text-[1.25rem] text-[#f0f0f5] mb-6 leading-relaxed">
-                  {heroData.description}
-                </p>
-                <div className="flex flex-wrap gap-4 mb-8">
-                  {heroData.features.map((feat, i) => (
-                    <span key={i} className="flex items-center gap-2 text-[0.95rem] text-[#9999aa]">
-                      <Check size={18} className="text-[#26ffd4]" /> {feat}
-                    </span>
-                  ))}
-                </div>
-                <a
-                  href={heroData.cta_href}
-                  className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
-                >
-                  {heroData.cta_text} <ArrowRight size={18} />
-                </a>
+      </header>
+      <main>
+        <section className="hero section-rail" aria-labelledby="hero-title">
+          <div className="layout hero-inner">
+            <div className="hero-topline"><span>{heroData.subtitle}</span><span>Architektur · Integration · Wissenstransfer</span></div>
+            <div className="hero-grid">
+              <div className="hero-copy">
+                <p className="eyebrow"><span className="status-dot" /> Für Teams, die KI in ihre Arbeit bringen</p>
+                <h1 id="hero-title">Agentensysteme<br /><span>für Ihre</span><br />Arbeitsabläufe<span className="accent">.</span></h1>
+                <p className="hero-description">{heroData.description}</p>
+                <div className="hero-actions"><a className="button-primary" href="#contact">{heroData.cta_text}<ArrowRight size={18} aria-hidden="true" /></a><a className="button-link" href="#approach">Mein Ansatz <ArrowDownRight size={17} aria-hidden="true" /></a></div>
               </div>
-
-              {/* Terminal → Contact */}
-              <div className="bg-[#0a0a0f]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.5)]">
-                <div className="flex items-center gap-2 px-4 py-3 bg-white/[0.03] border-b border-white/[0.08]">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-                  <div className="flex-1 text-center font-mono text-xs text-[#5a5a6e]">agentic-dev.sh</div>
+              <div className="system-diagram" aria-label="Vom Auftrag über Agenten und Werkzeuge zur Prüfung">
+                <div className="diagram-heading"><span>Ein System, das zusammenarbeitet</span><span aria-hidden="true">↗</span></div>
+                <div className="diagram-flow">
+                  <div className="diagram-node"><span>01 / AUFGABE</span><strong>Ihr Arbeitsprozess</strong><small>Ziel · Kontext · Freigaben</small></div>
+                  <div className="diagram-connection" aria-hidden="true" />
+                  <div className="diagram-node diagram-node--active"><span>02 / AUSFÜHRUNG</span><strong>Agent &amp; Werkzeuge</strong><small>Modelle · APIs · MCP</small></div>
+                  <div className="diagram-connection" aria-hidden="true" />
+                  <div className="diagram-node"><span>03 / PRÜFUNG</span><strong>Ergebnis &amp; Team</strong><small>Evaluation · Übergabe</small></div>
                 </div>
-                <div className="p-6 pb-3 font-mono text-sm leading-relaxed">
-                  {[
-                    { cmd: 'ollama', args: 'run lfm2.5-thinking', color: '#f0f0f5' },
-                    { text: 'pulling manifest', color: '#9999aa' },
-                    { text: 'pulling a7b19185f316: 100% ▕████████████████▏ 731 MB', color: '#9999aa' },
-                    { text: 'pulling 55a61add4838: 100% ▕████████████████▏  10 KB', color: '#9999aa' },
-                    { text: 'verifying sha256 digest', color: '#9999aa' },
-                    { text: 'writing manifest', color: '#9999aa' },
-                    { text: 'success', color: '#26ffd4', success: true },
-                  ].map((line, i) => (
-                    <div
-                      key={i}
-                      className="opacity-0"
-                      style={{
-                        animation: `typeLine 0.5s ease forwards`,
-                        animationDelay: `${0.5 + i * 0.7}s`
-                      }}
-                    >
-                      {line.cmd && <span className="text-[#26ffd4]">$ </span>}
-                      {line.cmd && <span className="text-[#f0f0f5]">{line.cmd} </span>}
-                      {line.args && <span className="text-[#ffa726]">{line.args}</span>}
-                      {line.text && <span style={{ color: line.color }}>{line.text}</span>}
-                    </div>
-                  ))}
-                </div>
-                <a
-                  href="mailto:hello@agentic-dev.io"
-                  className="block px-6 pb-6 font-mono text-sm opacity-0 hover:bg-white/[0.02] transition-colors"
-                  style={{ animation: 'typeLine 0.8s ease forwards', animationDelay: '5.5s' }}
-                >
-                  <div className="pt-4 text-[#26ffd4] text-xs flex items-center gap-2">
-                    <span>{'>>>'}</span>
-                    <span className="text-[#f0f0f5]">hello@agentic-dev.io</span>
-                    <span className="inline-block w-1.5 h-3.5 bg-[#ff6b35] animate-[blink_1s_step-end_infinite]" />
-                  </div>
-                  <div className="mt-3 text-[#5a5a6e] text-xs">Klicken um E-Mail zu öffnen</div>
-                </a>
+                <div className="diagram-foot">ARCHITEKTUR <span>→</span> INTEGRATION <span>→</span> EVALUATION</div>
               </div>
             </div>
+            <div className="hero-signals">{heroData.features.map((feature, i) => <div key={feature}><span>0{i + 1}</span>{feature}</div>)}</div>
           </div>
         </section>
 
-        {/* Capabilities Section */}
-        <section id="capabilities" className="py-12 md:py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Was ich anbiete</h2>
-            <p className="text-lg text-[#9999aa] mb-8">Für Teams, die Agenten mit ihren Systemen verbinden und Prototypen zuverlässig weiterentwickeln möchten.</p>
-            <div className="grid md:grid-cols-2 gap-6">
-              {servicesData.map((service, i) => (
-                <div
-                  key={i}
-                  className={`p-8 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border rounded-2xl relative hover:border-white/[0.15] transition-all ${
-                    service.metadata.featured ? 'border-[#ff6b35]' : 'border-white/[0.08]'
-                  }`}
-                >
-                  {service.metadata.featured && (
-                    <span className="absolute -top-3 right-5 px-3 py-1 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] text-xs font-semibold rounded-full">
-                      Core
-                    </span>
-                  )}
-                  <h3 className="text-lg font-semibold mb-2">{service.icon} {service.title}</h3>
-                  <p className="text-sm text-[#9999aa] mb-4">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feat, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-[#9999aa]">
-                        <Check size={14} className="text-[#26ffd4] flex-shrink-0" /> {feat}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+        <section className="section-rail section-dark" id="approach">
+          <div className="layout section-inner">
+            <p className="section-label">01 / Ansatz</p>
+            <div className="section-intro"><h2>Von der Aufgabe zum <span>überprüfbaren Ablauf.</span></h2><p>Ein Modell allein löst noch keinen Arbeitsprozess. Ich verbinde es mit den richtigen Werkzeugen, Informationen und Prüfstellen – passend zu Ihrer Aufgabe und Umgebung.</p></div>
+            <div className="approach-grid">{approach.map(([number, title, text]) => <article className="approach-item" key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
           </div>
         </section>
 
-        {/* Projects Section */}
-        <section id="projects" className="py-12 md:py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-4 font-mono">Open Source</div>
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Ausgewählte Projekte</h2>
-            <p className="text-lg text-[#9999aa] mb-10 max-w-[700px]">
-              Eigene Open-Source-Projekte zeigen, wie Agenten, Daten und Werkzeuge zusammenarbeiten.
-            </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projectsData.map((project, i) => (
-                <a
-                  key={i}
-                  href={project.metadata.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl hover:border-[#ff6b35]/40 hover:shadow-[0_8px_32px_rgba(255,107,53,0.1)] hover:-translate-y-1 transition-all block no-underline"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="text-2xl">{project.icon}</span>
-                    <div className="flex items-center gap-2">
-                      {project.metadata.badge && (
-                        <span className="px-2 py-0.5 bg-[#ff6b35]/10 border border-[#ff6b35]/30 text-[#ff6b35] text-[0.65rem] font-semibold rounded-full uppercase tracking-wider">
-                          {project.metadata.badge}
-                        </span>
-                      )}
-                      <ExternalLink size={14} className="text-[#5a5a6e] group-hover:text-[#ff6b35] transition-colors" />
-                    </div>
-                  </div>
-                  <h3 className="font-mono text-base font-semibold mb-2 text-[#f0f0f5] group-hover:text-[#ff6b35] transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-[#9999aa] mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.features.map((tag, j) => (
-                      <span key={j} className="px-2 py-0.5 bg-white/[0.04] border border-white/[0.06] text-[0.7rem] text-[#5a5a6e] rounded-md">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </a>
-              ))}
-            </div>
-            <div className="mt-10 text-center">
-              <a
-                href="https://github.com/orgs/agentic-dev-io/repositories?q=mirror%3Afalse+fork%3Afalse+archived%3Afalse"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-[#9999aa] hover:text-[#ff6b35] transition-colors font-mono"
-              >
-                Alle Repositories ansehen <ExternalLink size={14} />
-              </a>
-            </div>
+        <section className="section-rail" id="services">
+          <div className="layout section-inner">
+            <p className="section-label">02 / Leistungen</p>
+            <div className="section-intro"><h2>Was ich <span>anbiete.</span></h2><p>Beratung, technische Umsetzung und Wissensvermittlung – einzeln oder als gemeinsame Begleitung Ihres Projekts.</p></div>
+            <div className="service-grid">{servicesData.map((service, i) => <article className="service-card" key={service.block_id}><span className="service-number">0{i + 1} / {['CONSULTING', 'ENGINEERING', 'CONSULTING', 'EDUCATION'][i]}</span><h3>{service.title}</h3><p>{service.description}</p><ul>{service.features.map(feature => <li key={feature}>{feature}</li>)}</ul></article>)}</div>
+            <p className="deployment-note"><span>Ihre Umgebung.</span> Je nach Aufgabe und Anforderungen kommen lokale, On-Premises- oder Cloud-Lösungen in Frage.</p>
           </div>
         </section>
 
-        {/* Stack Section */}
-        <section className="py-12 md:py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Tech Stack</h2>
-            <p className="text-lg text-[#9999aa] mb-8">Die Technologien hinter unseren Projekten.</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {stackData.map((item, i) => (
-                <div key={i} className="p-6 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center hover:border-white/[0.15] transition-all">
-                  <div className="font-mono text-base text-[#f0f0f5] mb-2">{item.title}</div>
-                  <div className="text-xs text-[#5a5a6e]">{item.description}</div>
-                </div>
-              ))}
-            </div>
+        <section className="section-rail section-dark" id="applications">
+          <div className="layout section-inner">
+            <p className="section-label">03 / Einsatzmöglichkeiten</p>
+            <div className="section-intro"><h2>Für Aufgaben, die <span>weitergehen.</span></h2><p>Welche Umsetzung sinnvoll ist, hängt von Ihren Daten, Werkzeugen und dem gewünschten Ergebnis ab. Mögliche Ausgangspunkte:</p></div>
+            <div className="examples-list">{examples.map(([title, description], i) => <article key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{description}</p></article>)}</div>
           </div>
         </section>
 
-        {/* About Section */}
-        <section className="py-12 md:py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-semibold mb-8 font-['Fraunces']">{aboutData.title}</h2>
-            <div>
-              {aboutData.metadata.paragraphs.map((p, i) => (
-                <p key={i} className="text-[#9999aa] mb-4" dangerouslySetInnerHTML={{ __html: p }} />
-              ))}
-              <div className="flex flex-wrap gap-4 mt-6">
-                {aboutData.metadata.links.map((link, i) => (
-                  <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-[rgba(24,24,32,0.6)] border border-white/[0.08] rounded-lg text-sm text-[#9999aa] hover:border-[#ff6b35] hover:text-[#f0f0f5] transition-all">
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Timeline */}
-            <div className="mt-12 p-6 bg-[rgba(24,24,32,0.4)] border border-white/[0.06] rounded-2xl">
-              <div className="text-xs uppercase tracking-widest text-[#5a5a6e] mb-6 font-mono">Evolution</div>
-              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
-                {[
-                  { year: '2004', label: 'Blender Origin', color: '#9999aa' },
-                  { year: '2008', label: 'VWAG Projekte', color: '#22d3ee' },
-                  { year: '2014', label: 'Neural Research', color: '#a78bfa' },
-                  { year: '2024', label: 'AI Agents', color: '#ffa726' },
-                  { year: '2025', label: 'agentic-dev', color: '#ff6b35' },
-                ].map((item, i) => (
-                  <div key={i} className="text-center">
-                    <div className="w-3 h-3 rounded-full mx-auto mb-2" style={{ backgroundColor: item.color }} />
-                    <div className="font-mono text-sm text-[#f0f0f5]">{item.year}</div>
-                    <div className="text-[0.7rem] text-[#5a5a6e] mt-1">{item.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+        <section className="section-rail" id="projects">
+          <div className="layout section-inner">
+            <p className="section-label">04 / Open Source</p>
+            <div className="section-intro"><h2>Arbeit zum <span>Nachvollziehen.</span></h2><p>Eigene Projekte zeigen, wie ich Agenten, Daten und Werkzeuge miteinander verbinde.</p></div>
+            <div className="project-grid">{projectsData.map(project => <a className="project-card" key={project.block_id} href={project.metadata.href} target="_blank" rel="noopener noreferrer"><div className="project-card__top"><span>OPEN SOURCE / {project.metadata.badge || 'PROJEKT'}</span><ExternalLink size={17} aria-hidden="true" /></div><h3>{project.title}</h3><p>{project.description}</p><div className="project-tags">{project.features.map(tag => <span key={tag}>{tag}</span>)}</div></a>)}</div>
+            <a className="text-link" href="https://github.com/orgs/agentic-dev-io/repositories?q=mirror%3Afalse+fork%3Afalse+archived%3Afalse" target="_blank" rel="noopener noreferrer">Alle Repositories ansehen <ArrowRight size={17} aria-hidden="true" /></a>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section id="contact" className="py-12 md:py-24 border-t border-white/[0.08]">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-[650px] mx-auto p-6 md:p-12 bg-[rgba(24,24,32,0.6)] backdrop-blur-xl border border-white/[0.08] rounded-2xl text-center">
-              <h2 className="text-3xl font-semibold mb-4 font-['Fraunces']">Ihr KI-Prototyp soll weiter?</h2>
-              <p className="text-[#9999aa] mb-8">
-                Schreiben Sie mir, welche Aufgabe Ihre Agenten übernehmen und welche Systeme sie dafür erreichen sollen.
-              </p>
-              <div className="flex flex-col items-center gap-4">
-                <a
-                  href="mailto:hello@agentic-dev.io"
-                  className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-[#ff6b35] to-[#ffa726] text-[#050508] rounded-xl font-semibold hover:translate-y-[-3px] hover:shadow-[0_15px_40px_rgba(255,107,53,0.35)] transition-all"
-                >
-                  Projekt besprechen <ArrowRight size={18} />
-                </a>
-                <div className="flex gap-8 mt-4">
-                  <a href="mailto:hello@agentic-dev.io" className="text-sm text-[#5a5a6e] hover:text-[#f0f0f5] transition-colors">
-                    hello@agentic-dev.io
-                  </a>
-                  <a href="https://www.linkedin.com/in/bj%C3%B6rn-bethge-a0754a329" target="_blank" rel="noopener noreferrer" className="text-sm text-[#5a5a6e] hover:text-[#f0f0f5] transition-colors">
-                    LinkedIn
-                  </a>
-                </div>
-              </div>
-            </div>
+        <section className="section-rail section-dark" id="about">
+          <div className="layout section-inner">
+            <p className="section-label">05 / Über mich</p>
+            <div className="about-grid"><div><h2>Björn<br /><span>Bethge.</span></h2><p className="about-role">FOUNDER &amp; AI SYSTEMS ENGINEER</p></div><div className="about-copy">{aboutData.metadata.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<div className="about-links">{aboutData.metadata.links.map(link => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">{link.label} <ExternalLink size={15} aria-hidden="true" /></a>)}</div></div></div>
           </div>
+        </section>
+
+        <section className="section-rail contact-section" id="contact">
+          <div className="layout section-inner"><p className="section-label">06 / Kontakt</p><h2>Eine Aufgabe<span className="accent">.</span><br /><span>Ein guter Anfang.</span></h2><p>Sie möchten Agenten in Ihren Arbeitsprozess einbinden oder einen bestehenden Prototyp weiterentwickeln? Erzählen Sie mir, woran Sie arbeiten.</p><a className="button-primary" href={mailtoLink(EMAIL_DOMAIN)}>Projekt besprechen <Mail size={18} aria-hidden="true" /></a><a className="contact-email" href={mailtoLink(EMAIL_DOMAIN)}>{getEmail(EMAIL_DOMAIN)}</a></div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="py-8 border-t border-white/[0.08]">
-        <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-[#5a5a6e]">© 2026 agentic-dev.io · agentic-dev Team · Deutschland</p>
-          <div className="flex flex-wrap justify-center gap-8">
-            <a href="mailto:hello@agentic-dev.io" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
-              Kontakt
-            </a>
-            <a href="https://www.linkedin.com/in/bj%C3%B6rn-bethge-a0754a329" target="_blank" rel="noopener noreferrer" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
-              LinkedIn
-            </a>
-            <a href="/impressum.html" className="text-sm text-[#5a5a6e] hover:text-[#9999aa] transition-colors">
-              Impressum & Datenschutz
-            </a>
-          </div>
-        </div>
-      </footer>
+      <footer className="site-footer"><div className="layout footer-inner"><span>© {new Date().getFullYear()} agentic-dev.io · Björn Bethge</span><nav aria-label="Rechtliches und Kontakt"><a href={mailtoLink(EMAIL_DOMAIN)}>Kontakt</a><a href="https://github.com/agentic-dev-io" target="_blank" rel="noopener noreferrer">GitHub</a><a href="/impressum.html">Impressum &amp; Datenschutz</a></nav></div></footer>
     </div>
   );
 }
