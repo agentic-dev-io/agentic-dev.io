@@ -21,6 +21,8 @@ npm run preview  # Preview build on port 4173
 
 Hero, Leistungen einschließlich Workshops, Projekte und Vorstellung werden im CMS gepflegt und mit `uv run cms export --site agentic-dev` aus dem CMS-Verzeichnis exportiert. Die Seite nutzt eine dunkle redaktionelle Gestaltung mit schieferblauer Palette nach der Designvorlage; Einsatzbeispiele und der Ablauf im Ansatz stehen in `src/App.jsx`.
 
+Die technische Bestandsaufnahme zum AI Act steht in `docs/ai-act-website-sichtung.md`.
+
 ## License
 
 [MIT Ethical Use](LICENSE)
